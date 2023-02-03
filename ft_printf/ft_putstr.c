@@ -1,25 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minitallk.h                                        :+:      :+:    :+:   */
+/*   ft_putstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hlakhal- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/05 00:20:33 by hlakhal-          #+#    #+#             */
-/*   Updated: 2023/02/03 03:54:34 by hlakhal-         ###   ########.fr       */
+/*   Created: 2022/11/04 02:20:21 by hlakhal-          #+#    #+#             */
+/*   Updated: 2022/11/10 16:50:45 by hlakhal-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINITALLK_H
-# define MINITALLK_H
+#include "ft_printf.h"
 
-# include<string.h>
-# include<stdlib.h>
-# include<unistd.h>
-# include<stdio.h>
-# include<signal.h>
-# include<sys/types.h>
-# include "./libft/libft.h"
-#include "./ft_printf/ft_printf.h"
+int	ft_putstr(char *s)
+{
+	int	i;
 
-#endif
+	i = 0;
+	if (!s)
+	{
+		write(1, "(null)", 6);
+		return (6);
+	}
+	while (s && s[i] != '\0')
+	{
+		write(1, &s[i], 1);
+		i++;
+	}
+	return (i);
+}

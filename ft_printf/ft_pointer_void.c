@@ -1,25 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minitallk.h                                        :+:      :+:    :+:   */
+/*   ft_pointer_void.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hlakhal- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/05 00:20:33 by hlakhal-          #+#    #+#             */
-/*   Updated: 2023/02/03 03:54:34 by hlakhal-         ###   ########.fr       */
+/*   Created: 2022/11/04 16:06:04 by hlakhal-          #+#    #+#             */
+/*   Updated: 2022/11/10 16:49:49 by hlakhal-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINITALLK_H
-# define MINITALLK_H
+#include "ft_printf.h"
 
-# include<string.h>
-# include<stdlib.h>
-# include<unistd.h>
-# include<stdio.h>
-# include<signal.h>
-# include<sys/types.h>
-# include "./libft/libft.h"
-#include "./ft_printf/ft_printf.h"
-
-#endif
+int	ft_pointer_void(void *nb)
+{
+	return (ft_putstr("0x") + ft_put_hex_u((size_t)nb, 'x'));
+}

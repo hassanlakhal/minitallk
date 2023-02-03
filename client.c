@@ -6,7 +6,7 @@
 /*   By: hlakhal- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 02:36:39 by hlakhal-          #+#    #+#             */
-/*   Updated: 2023/02/03 03:19:58 by hlakhal-         ###   ########.fr       */
+/*   Updated: 2023/02/03 03:46:56 by hlakhal-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,11 @@ int	main(int argc, char **argv)
 	if (argc == 3)
 	{
 		pid = ft_atoi(argv[1]);
+		if (!pid)
+		{
+			write(1," PID not working ",18);
+			exit(0);
+		}
 		while (argv[2][i])
 		{
 			send_message(pid, argv[2][i]);
@@ -45,5 +50,5 @@ int	main(int argc, char **argv)
 		send_message(pid, '\n');
 	}
 	else
-		printf(" plese entrer <message> and <pid>\n");
+		write(1," plese entrer <message> and <pid>\n",35);
 }

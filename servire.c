@@ -6,7 +6,7 @@
 /*   By: hlakhal- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 02:56:09 by hlakhal-          #+#    #+#             */
-/*   Updated: 2023/02/03 03:20:12 by hlakhal-         ###   ########.fr       */
+/*   Updated: 2023/02/03 03:48:47 by hlakhal-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	main(void)
 	pid_t	pid;
 
 	pid = getpid();
-	printf("hello of the server pid ---> %d\n", pid);
+	ft_printf("hello of the server pid ---> %d\n", pid);
 	while (1)
 	{
 		signal(SIGUSR1, handle);

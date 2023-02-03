@@ -1,25 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minitallk.h                                        :+:      :+:    :+:   */
+/*   ft_putnbr_u.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hlakhal- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/05 00:20:33 by hlakhal-          #+#    #+#             */
-/*   Updated: 2023/02/03 03:54:34 by hlakhal-         ###   ########.fr       */
+/*   Created: 2022/11/04 02:31:52 by hlakhal-          #+#    #+#             */
+/*   Updated: 2022/11/04 21:02:22 by hlakhal-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINITALLK_H
-# define MINITALLK_H
+#include "ft_printf.h"
 
-# include<string.h>
-# include<stdlib.h>
-# include<unistd.h>
-# include<stdio.h>
-# include<signal.h>
-# include<sys/types.h>
-# include "./libft/libft.h"
-#include "./ft_printf/ft_printf.h"
+int	ft_putnbr_u(unsigned int nb)
+{
+	char	*tab;
+	int		len;
 
-#endif
+	tab = ft_uitoa(nb);
+	len = ft_putstr(tab);
+	free(tab);
+	return (len);
+}
