@@ -1,45 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   servire.c                                          :+:      :+:    :+:   */
+/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hlakhal- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/04 02:56:09 by hlakhal-          #+#    #+#             */
-/*   Updated: 2023/02/03 03:20:12 by hlakhal-         ###   ########.fr       */
+/*   Created: 2022/10/15 02:00:57 by hlakhal-          #+#    #+#             */
+/*   Updated: 2022/11/01 15:02:44 by hlakhal-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minitallk.h"
+#include <unistd.h>
 
-void	handle(int sig)
+void	ft_putstr_fd(char *s, int fd)
 {
-	static int	i;
-	static int	j;
+	int	i;
 
-	j++;
-	if (sig == SIGUSR1)
-		i = (i | 1);
-	if (j == 8)
+	i = 0;
+	while (s && s[i] != '\0')
 	{
-		ft_putchar_fd(i, 1);
-		j = 0;
-		i = 0;
-	}
-	else
-		i = i << 1;
-}
-
-int	main(void)
-{
-	pid_t	pid;
-
-	pid = getpid();
-	printf("hello of the server pid ---> %d\n", pid);
-	while (1)
-	{
-		signal(SIGUSR1, handle);
-		signal(SIGUSR2, handle);
-		pause();
+		write(fd, &s[i], 1);
+		i++;
 	}
 }

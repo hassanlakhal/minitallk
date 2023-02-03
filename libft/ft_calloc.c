@@ -1,45 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   servire.c                                          :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hlakhal- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/04 02:56:09 by hlakhal-          #+#    #+#             */
-/*   Updated: 2023/02/03 03:20:12 by hlakhal-         ###   ########.fr       */
+/*   Created: 2022/10/10 14:01:16 by hlakhal-          #+#    #+#             */
+/*   Updated: 2022/11/01 18:12:40 by hlakhal-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minitallk.h"
+#include "libft.h"
 
-void	handle(int sig)
+void	*ft_calloc(size_t count, size_t size)
 {
-	static int	i;
-	static int	j;
+	void	*p;
 
-	j++;
-	if (sig == SIGUSR1)
-		i = (i | 1);
-	if (j == 8)
-	{
-		ft_putchar_fd(i, 1);
-		j = 0;
-		i = 0;
-	}
-	else
-		i = i << 1;
-}
-
-int	main(void)
-{
-	pid_t	pid;
-
-	pid = getpid();
-	printf("hello of the server pid ---> %d\n", pid);
-	while (1)
-	{
-		signal(SIGUSR1, handle);
-		signal(SIGUSR2, handle);
-		pause();
-	}
+	if (size && (count > SIZE_MAX / size))
+		return (NULL);
+	p = (void *)malloc(size * count);
+	if (p)
+		ft_bzero(p, size * count);
+	return (p);
 }

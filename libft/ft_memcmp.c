@@ -1,45 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   servire.c                                          :+:      :+:    :+:   */
+/*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hlakhal- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/04 02:56:09 by hlakhal-          #+#    #+#             */
-/*   Updated: 2023/02/03 03:20:12 by hlakhal-         ###   ########.fr       */
+/*   Created: 2022/10/09 20:26:10 by hlakhal-          #+#    #+#             */
+/*   Updated: 2022/11/01 15:53:29 by hlakhal-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minitallk.h"
+#include "libft.h"
 
-void	handle(int sig)
+int	ft_memcmp(const void *s1, const void *s2, size_t n)
 {
-	static int	i;
-	static int	j;
+	unsigned char	*str1;
+	unsigned char	*str2;
+	size_t			i;
 
-	j++;
-	if (sig == SIGUSR1)
-		i = (i | 1);
-	if (j == 8)
+	i = 0;
+	str1 = (unsigned char *)s1;
+	str2 = (unsigned char *)s2;
+	while (i < n)
 	{
-		ft_putchar_fd(i, 1);
-		j = 0;
-		i = 0;
+		if (str1[i] != str2[i])
+			return (((str1)[i] - (str2)[i]));
+		i++;
 	}
-	else
-		i = i << 1;
-}
-
-int	main(void)
-{
-	pid_t	pid;
-
-	pid = getpid();
-	printf("hello of the server pid ---> %d\n", pid);
-	while (1)
-	{
-		signal(SIGUSR1, handle);
-		signal(SIGUSR2, handle);
-		pause();
-	}
+	return (0);
 }

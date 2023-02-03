@@ -1,45 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   servire.c                                          :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hlakhal- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/04 02:56:09 by hlakhal-          #+#    #+#             */
-/*   Updated: 2023/02/03 03:20:12 by hlakhal-         ###   ########.fr       */
+/*   Created: 2022/10/10 14:50:39 by hlakhal-          #+#    #+#             */
+/*   Updated: 2022/11/01 15:42:54 by hlakhal-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minitallk.h"
+#include "libft.h"
 
-void	handle(int sig)
+char	*ft_strdup(const char *src)
 {
-	static int	i;
-	static int	j;
+	char	*new;
+	int		len;
+	int		i;
 
-	j++;
-	if (sig == SIGUSR1)
-		i = (i | 1);
-	if (j == 8)
-	{
-		ft_putchar_fd(i, 1);
-		j = 0;
-		i = 0;
-	}
+	len = ft_strlen(src) + 1;
+	i = 0;
+	new = (char *)malloc(sizeof(char) * len);
+	if (!new)
+		return (0);
 	else
-		i = i << 1;
-}
-
-int	main(void)
-{
-	pid_t	pid;
-
-	pid = getpid();
-	printf("hello of the server pid ---> %d\n", pid);
-	while (1)
 	{
-		signal(SIGUSR1, handle);
-		signal(SIGUSR2, handle);
-		pause();
+		while (src[i])
+		{
+			new[i] = src[i];
+			i++;
+		}
+		new[i] = '\0';
 	}
+	return (new);
 }

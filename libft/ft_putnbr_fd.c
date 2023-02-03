@@ -1,45 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   servire.c                                          :+:      :+:    :+:   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hlakhal- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/04 02:56:09 by hlakhal-          #+#    #+#             */
-/*   Updated: 2023/02/03 03:20:12 by hlakhal-         ###   ########.fr       */
+/*   Created: 2022/10/18 00:26:17 by hlakhal-          #+#    #+#             */
+/*   Updated: 2022/10/30 13:16:11 by hlakhal-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minitallk.h"
+#include "libft.h"
 
-void	handle(int sig)
+void	ft_putnbr_fd(int nb, int fd)
 {
-	static int	i;
-	static int	j;
-
-	j++;
-	if (sig == SIGUSR1)
-		i = (i | 1);
-	if (j == 8)
+	if (nb == -2147483648)
 	{
-		ft_putchar_fd(i, 1);
-		j = 0;
-		i = 0;
+		ft_putnbr_fd(-214748364, fd);
+		ft_putchar_fd('8', fd);
+	}
+	else if (nb > 9)
+	{
+		ft_putnbr_fd(nb / 10, fd);
+		ft_putnbr_fd(nb % 10, fd);
+	}
+	else if (nb < 0)
+	{
+		ft_putchar_fd('-', fd);
+		ft_putnbr_fd(-nb, fd);
 	}
 	else
-		i = i << 1;
-}
-
-int	main(void)
-{
-	pid_t	pid;
-
-	pid = getpid();
-	printf("hello of the server pid ---> %d\n", pid);
-	while (1)
-	{
-		signal(SIGUSR1, handle);
-		signal(SIGUSR2, handle);
-		pause();
-	}
+		ft_putchar_fd((nb + 48), fd);
 }

@@ -1,45 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   servire.c                                          :+:      :+:    :+:   */
+/*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hlakhal- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/04 02:56:09 by hlakhal-          #+#    #+#             */
-/*   Updated: 2023/02/03 03:20:12 by hlakhal-         ###   ########.fr       */
+/*   Created: 2022/10/22 11:10:09 by hlakhal-          #+#    #+#             */
+/*   Updated: 2022/11/01 15:43:16 by hlakhal-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minitallk.h"
+#include "libft.h"
 
-void	handle(int sig)
+char	*ft_strrchr(const char *s, int c)
 {
-	static int	i;
-	static int	j;
+	unsigned char	*ret;
+	int				i;
+	unsigned char	j;
 
-	j++;
-	if (sig == SIGUSR1)
-		i = (i | 1);
-	if (j == 8)
+	ret = NULL;
+	i = 0;
+	if (c >= 255)
 	{
-		ft_putchar_fd(i, 1);
-		j = 0;
-		i = 0;
+		j = (unsigned char)c;
+		if (j == 0)
+			return (ft_strchr(s, 0));
 	}
 	else
-		i = i << 1;
-}
-
-int	main(void)
-{
-	pid_t	pid;
-
-	pid = getpid();
-	printf("hello of the server pid ---> %d\n", pid);
-	while (1)
+		j = c;
+	while (s[i])
 	{
-		signal(SIGUSR1, handle);
-		signal(SIGUSR2, handle);
-		pause();
+		if (s[i] == j)
+			ret = (unsigned char *)(s + i);
+		i++;
 	}
+	if (c == '\0')
+		ret = (unsigned char *)(s + i);
+	return ((char *)(ret));
 }

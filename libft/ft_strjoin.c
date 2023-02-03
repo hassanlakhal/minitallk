@@ -1,45 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   servire.c                                          :+:      :+:    :+:   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hlakhal- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/04 02:56:09 by hlakhal-          #+#    #+#             */
-/*   Updated: 2023/02/03 03:20:12 by hlakhal-         ###   ########.fr       */
+/*   Created: 2022/10/10 23:44:13 by hlakhal-          #+#    #+#             */
+/*   Updated: 2022/11/01 14:45:06 by hlakhal-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minitallk.h"
+#include "libft.h"
 
-void	handle(int sig)
+char	*ft_strjoin(char const *s1, char const *s2)
 {
-	static int	i;
-	static int	j;
+	int		j;
+	int		i;
+	char	*newstr;
 
-	j++;
-	if (sig == SIGUSR1)
-		i = (i | 1);
-	if (j == 8)
+	i = 0;
+	j = 0;
+	if (!s2 || !s1)
+		return (NULL);
+	newstr = (char *)malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
+	if (!newstr)
+		return (0);
+	while (i < (int)ft_strlen(s1))
 	{
-		ft_putchar_fd(i, 1);
-		j = 0;
-		i = 0;
+		newstr[i] = s1[i];
+		i++;
 	}
-	else
-		i = i << 1;
-}
-
-int	main(void)
-{
-	pid_t	pid;
-
-	pid = getpid();
-	printf("hello of the server pid ---> %d\n", pid);
-	while (1)
+	while (j < (int)ft_strlen(s2))
 	{
-		signal(SIGUSR1, handle);
-		signal(SIGUSR2, handle);
-		pause();
+		newstr[i++] = s2[j];
+		j++;
 	}
+	newstr[i] = '\0';
+	return (newstr);
 }

@@ -1,45 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   servire.c                                          :+:      :+:    :+:   */
+/*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hlakhal- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/04 02:56:09 by hlakhal-          #+#    #+#             */
-/*   Updated: 2023/02/03 03:20:12 by hlakhal-         ###   ########.fr       */
+/*   Created: 2022/10/06 17:47:43 by hlakhal-          #+#    #+#             */
+/*   Updated: 2022/10/31 15:09:53 by hlakhal-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minitallk.h"
+#include "libft.h"
 
-void	handle(int sig)
+void	*ft_memcpy(void *dst, const void *src, size_t n)
 {
-	static int	i;
-	static int	j;
+	unsigned char	*str;
+	unsigned char	*str_1;
+	size_t			i;
 
-	j++;
-	if (sig == SIGUSR1)
-		i = (i | 1);
-	if (j == 8)
+	i = 0;
+	str = dst;
+	str_1 = (unsigned char *)src;
+	if (str == str_1)
+		return (str);
+	while (i < n)
 	{
-		ft_putchar_fd(i, 1);
-		j = 0;
-		i = 0;
+		str[i] = str_1[i];
+		i++;
 	}
-	else
-		i = i << 1;
-}
-
-int	main(void)
-{
-	pid_t	pid;
-
-	pid = getpid();
-	printf("hello of the server pid ---> %d\n", pid);
-	while (1)
-	{
-		signal(SIGUSR1, handle);
-		signal(SIGUSR2, handle);
-		pause();
-	}
+	return (dst);
 }

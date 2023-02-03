@@ -1,45 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   servire.c                                          :+:      :+:    :+:   */
+/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hlakhal- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/04 02:56:09 by hlakhal-          #+#    #+#             */
-/*   Updated: 2023/02/03 03:20:12 by hlakhal-         ###   ########.fr       */
+/*   Created: 2022/10/09 13:42:08 by hlakhal-          #+#    #+#             */
+/*   Updated: 2022/11/02 19:44:05 by hlakhal-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minitallk.h"
+#include "libft.h"
 
-void	handle(int sig)
+size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 {
-	static int	i;
-	static int	j;
+	size_t	len;
+	size_t	i;
 
-	j++;
-	if (sig == SIGUSR1)
-		i = (i | 1);
-	if (j == 8)
+	i = 0;
+	len = 0;
+	while (src[len])
+		len++;
+	if (dstsize == 0)
+		return (len);
+	while (len && i < (dstsize - 1))
 	{
-		ft_putchar_fd(i, 1);
-		j = 0;
-		i = 0;
+		dst[i] = src[i];
+		if (dst[i] == '\0')
+			break ;
+		i++;
 	}
-	else
-		i = i << 1;
-}
-
-int	main(void)
-{
-	pid_t	pid;
-
-	pid = getpid();
-	printf("hello of the server pid ---> %d\n", pid);
-	while (1)
-	{
-		signal(SIGUSR1, handle);
-		signal(SIGUSR2, handle);
-		pause();
-	}
+	dst[i] = '\0';
+	return (len);
 }
