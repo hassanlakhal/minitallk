@@ -6,7 +6,7 @@
 /*   By: hlakhal- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 02:56:09 by hlakhal-          #+#    #+#             */
-/*   Updated: 2023/02/03 03:48:47 by hlakhal-         ###   ########.fr       */
+/*   Updated: 2023/02/06 17:41:46 by hlakhal-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,16 +30,17 @@ void	handle(int sig)
 		i = i << 1;
 }
 
-int	main(void)
+int	main(int argv,char **argc)
 {
 	pid_t	pid;
-
-	pid = getpid();
-	ft_printf("hello of the server pid ---> %d\n", pid);
-	while (1)
+	(void) argc;
+	if(argv == 1)
 	{
+		pid = getpid();
+		ft_printf("hello of the server pid ---> %d\n", pid);
 		signal(SIGUSR1, handle);
 		signal(SIGUSR2, handle);
-		pause();
+		while (1)
+			;
 	}
 }
